@@ -30,8 +30,9 @@ Hector Fabio Cadavid Rengifo
 
 Authors
 ---------
-Tiffany Estupiñan L. 
-Kristhian Gómez 
+>Tiffany Estupiñan L. 
+
+>Kristhian Gómez 
 
 
 Description
