@@ -86,7 +86,7 @@ public class BombRESTController {
     public ResponseEntity<?> getSalaDisponible() {
         synchronized(services){
         try {
-            return new ResponseEntity<>(String.valueOf(services.getSalaDisponile()),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(String.valueOf(services.getSalaDisponible()),HttpStatus.ACCEPTED);
         } catch (ServicesException ex) {
             Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
