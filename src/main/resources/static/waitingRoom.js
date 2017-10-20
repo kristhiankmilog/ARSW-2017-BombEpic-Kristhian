@@ -27,7 +27,7 @@ function players() {
         ,
                 function (err) {
                     alert("err:" + err.responseText);
-                    flag = 0;
+                    
                 }
 
         );
@@ -52,10 +52,10 @@ function connect() {
         stompClient.subscribe('/topic/mostrarJugadores', function (data) {
             gana = JSON.parse(data.body);
             alert(String(gana));
-            prot = gana[0];
+            play = gana[0];
             $("#player").empty();
-            for (i = 0; i < prot.length; i++) {
-                $("#player").append(prot[i].nombre + "<br>");
+            for (i = 0; i < play.length; i++) {
+                $("#player").append(play[i].nombre + "<br>");
             }
             
         });
@@ -73,7 +73,7 @@ $(document).ready(
             console.info('loading script!...');
             connect();
             nickname = sessionStorage.getItem('nickname');
-            
+            $("#welcome").append("<b>Welcome " + sessionStorage.getItem('nickname') + "</b><br><br>");
             
             
             $.get("/salas/salaDisponible", function (data) {

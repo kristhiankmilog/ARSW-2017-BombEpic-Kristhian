@@ -33,6 +33,8 @@ public interface BombServices {
     public ConcurrentHashMap<Integer,Sala> getSalasMat()throws ServicesException;
     
     public void setSalasMat(ConcurrentHashMap<Integer,Sala> sala)throws ServicesException;
+
+    
     
     
 }

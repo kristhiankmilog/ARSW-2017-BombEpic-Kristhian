@@ -78,7 +78,21 @@ public class BombRESTController {
             Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("/{salanum}/ must be an integer value.",HttpStatus.BAD_REQUEST);
         }
-}
+        
+    }
+    
+    
+    @RequestMapping(path = "/salaDisponible",method = RequestMethod.GET)
+    public ResponseEntity<?> getSalaDisponible() {
+        synchronized(services){
+        try {
+            return new ResponseEntity<>(String.valueOf(services.getSalaDisponile()),HttpStatus.ACCEPTED);
+        } catch (ServicesException ex) {
+            Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
+        }}
+    }
+
        
        
      

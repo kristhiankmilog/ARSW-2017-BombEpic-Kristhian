@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 public class BombServicesStub implements BombServices{
     private ConcurrentHashMap<Integer, Jugador> salasData=new ConcurrentHashMap<>();
     private String[][] mat;
-
+    private int salas=0;
+    
+    
     public BombServicesStub() {
         salasData.put(1,new Jugador());
     }
@@ -46,7 +48,7 @@ public class BombServicesStub implements BombServices{
 
     @Override
     public int getSalaDisponile() throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return salas;
     }
 
     @Override
