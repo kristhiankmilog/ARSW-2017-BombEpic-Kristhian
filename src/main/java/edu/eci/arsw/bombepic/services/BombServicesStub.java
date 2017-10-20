@@ -8,8 +8,14 @@ package edu.eci.arsw.bombepic.services;
 import edu.eci.arsw.bombepic.model.InformacionJuego;
 import edu.eci.arsw.bombepic.model.Jugador;
 import edu.eci.arsw.bombepic.model.Sala;
+import edu.eci.arsw.bombepic.model.Jugadores;
+import edu.eci.arsw.bombepic.model.Tablero;
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,61 +26,81 @@ import org.springframework.stereotype.Service;
 @Service
 
 public class BombServicesStub implements BombServices{
-    private ConcurrentHashMap<Integer, Jugador> salasData=new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Jugadores> salasData=new ConcurrentHashMap<>();
     private String[][] mat;
     private int salas=0;
-    
-    
-    public BombServicesStub() {
-        salasData.put(1,new Jugador());
-    }
-    
-    
+    private ConcurrentHashMap<Integer, Sala> salasMat = new ConcurrentHashMap<>();
 
     @Override
     public void registroJugador(int salanum, Jugador p) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+          CopyOnWriteArrayList tmp =salasData.get(salanum).getJugadores();
+          int a = 65 +tmp.size();
+          salasData.get(salanum).setIds(p.getnick(), Character.toString((char)a));
+          InformacionJuego inf=new InformacionJuego(p.getnombre(), Character.toString((char)a));
+          tmp.add(p);
+          salasData.get(salanum).setJugadores(tmp);
+          
+        }
 
     @Override
     public List<Jugador> getJugadores(int salanum) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return salasData.get(salanum).getJugadores();
     }
+
 
     @Override
     public String[][] getTablero() throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (mat==null){
+            try {
+                mat=Tablero.tablero();
+            } catch (IOException ex) {
+                Logger.getLogger(BombServicesStub.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        return mat;
+               
     }
 
     @Override
-    public int getSalaDisponile() throws ServicesException {
+    public int getSalaDisponible() throws ServicesException {
         return salas;
+
     }
 
     @Override
     public void setSalaDisponible(int sala) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        salasData.put(sala,new Jugadores());
+        this.salas=sala;
+
     }
 
     @Override
     public String getID(int sala) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       return null; // falta implementacion
+
+   }
 
     @Override
     public List<InformacionJuego> getInfo(int sala) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return salasData.get(sala).getInformacion();
+
+
     }
 
     @Override
     public ConcurrentHashMap<Integer, Sala> getSalasMat() throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.salasMat;
     }
 
     @Override
     public void setSalasMat(ConcurrentHashMap<Integer, Sala> sala) throws ServicesException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.salasMat=sala;
+
+
     }
+
     
+ 
     
 }

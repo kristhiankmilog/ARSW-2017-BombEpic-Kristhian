@@ -22,7 +22,7 @@ public interface BombServices {
     
     public String [][]getTablero()throws ServicesException;
     
-    public int getSalaDisponile()throws ServicesException;
+    public int getSalaDisponible()throws ServicesException;
     
     public void setSalaDisponible(int sala)throws ServicesException;
     

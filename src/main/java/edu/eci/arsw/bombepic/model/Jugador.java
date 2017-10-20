@@ -5,6 +5,8 @@
  */
 package edu.eci.arsw.bombepic.model;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 /**
  *
  * @author tiffany
@@ -31,12 +33,10 @@ public class Jugador{
     public void setnombre(String nombre){
         this.nombre=nombre;
     }
+
     
     public Jugador(){}
     
-    
-    
-    
-    
+
     
 }
