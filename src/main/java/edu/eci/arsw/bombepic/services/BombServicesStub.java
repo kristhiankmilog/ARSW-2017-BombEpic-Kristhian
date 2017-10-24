@@ -30,7 +30,12 @@ public class BombServicesStub implements BombServices{
     private String[][] mat;
     private int salas=0;
     private ConcurrentHashMap<Integer, Sala> salasMat = new ConcurrentHashMap<>();
-
+    
+    public BombServicesStub(){
+        salasData.put(0,new Jugadores());
+    }
+    
+    
     @Override
     public void registroJugador(int salanum, Jugador p) throws ServicesException {
           CopyOnWriteArrayList tmp =salasData.get(salanum).getJugadores();

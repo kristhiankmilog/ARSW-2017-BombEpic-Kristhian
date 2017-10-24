@@ -6,8 +6,8 @@ var gana2;
 var sala;
 
 function players() {
-   
-        
+    if (flag === 0) {
+        flag = 1;        
         var f=new Date();
         cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds();
         identificador=nickname+cad;
@@ -18,20 +18,20 @@ function players() {
             contentType: "application/json"
         }).then(
                 function () {
-                    sessionStorage.setItem('identificador', identificador);
+                    
                     stompClient.subscribe('/topic/Jugar.'+sessionStorage.getItem('sala'), function (data) {
                         document.location.href = "game.html";
-                        
                     });
+                    sessionStorage.setItem('identificador', identificador);
                 }
         ,
                 function (err) {
                     alert("err:" + err.responseText);
-                    
+                    flag = 0;
                 }
 
         );
-
+    }
     
 }
 
@@ -51,8 +51,14 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/mostrarJugadores', function (data) {
             gana = JSON.parse(data.body);
-            alert(String(gana));
+            alert(String(data));
+            if (flag===0){
+                if (gana[0].length===4){
+                    location.reload();
+            }
+            }
             play = gana[0];
+            
             $("#player").empty();
             for (i = 0; i < play.length; i++) {
                 $("#player").append(play[i].nombre + "<br>");

@@ -11,11 +11,14 @@ import edu.eci.arsw.bombepic.model.Jugador;
 import org.springframework.web.bind.annotation.PathVariable;
 import edu.eci.arsw.bombepic.services.BombServices;
 import edu.eci.arsw.bombepic.services.ServicesException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,12 +36,22 @@ public class BombRESTController {
      @Autowired
         BombServices services;
      
-     @RequestMapping(path = "/{salanum}/jugadores",method = RequestMethod.PUT)
+     @Autowired
+    SimpMessagingTemplate msgt;
+     
+     @RequestMapping(path = "/{salanum}/players",method = RequestMethod.PUT)
      public ResponseEntity<?> agregarJugador(@PathVariable(name="salanum")String salanum,@RequestBody Jugador p){
          synchronized (services){
              try {
                  if(services.getJugadores(Integer.parseInt(salanum)).size()< 4 ){
-                     services.registroJugador(Integer.parseInt(salanum), p);
+                    services.registroJugador(Integer.parseInt(salanum), p);
+                    ArrayList<List<Jugador>> temp=new ArrayList<>();
+                    List <Jugador >playBombers=services.getJugadores(Integer.parseInt(salanum));
+                    
+                    temp.add(playBombers);
+                    
+                    msgt.convertAndSend("/topic/mostrarJugadores",temp);
+                     
                  }
              } catch (Exception ex) {
                    Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
