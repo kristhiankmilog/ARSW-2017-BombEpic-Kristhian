@@ -50,6 +50,10 @@ public class BombRESTController {
                     
                     temp.add(playBombers);
                     
+                    if(playBombers.size()==4){
+                        services.setSalaDisponible(services.getSalaDisponible()+1);
+                    }
+                    
                     msgt.convertAndSend("/topic/mostrarJugadores",temp);
                      
                  }

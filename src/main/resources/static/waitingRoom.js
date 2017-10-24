@@ -19,7 +19,7 @@ function players() {
         }).then(
                 function () {
                     
-                    stompClient.subscribe('/topic/Jugar.'+sessionStorage.getItem('sala'), function (data) {
+                    stompClient.subscribe('/topic/Play.'+sessionStorage.getItem('sala'), function (data) {
                         document.location.href = "game.html";
                     });
                     sessionStorage.setItem('identificador', identificador);
