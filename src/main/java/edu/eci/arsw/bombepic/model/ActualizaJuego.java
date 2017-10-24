@@ -14,6 +14,15 @@ import java.util.ArrayList;
 public class ActualizaJuego {
     private ArrayList<Elemento> actualizaciones;
     private Boolean poderes=false;
+    private Boolean rompibles = false;
+
+    public Boolean getRompibles() {
+        return rompibles;
+    }
+
+    public void setRompibles(Boolean rompibles) {
+        this.rompibles = rompibles;
+    }
     int [] posiciones=new int[2];
     private String jugador;
 

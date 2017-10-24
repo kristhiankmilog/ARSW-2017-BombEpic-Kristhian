@@ -21,7 +21,10 @@ var cont = 0;
 
 /**
  * 
- * Verifica que se ínte en el sentido de la tecla
+ *  Flecha izquierda 	37 	
+    Flecha arriba 	38 	
+    Flecha derecha 	39 	
+    Flecha abajo 	40 	
  */
 function selectImage() {
     if (ky === 37) {
@@ -36,6 +39,11 @@ function selectImage() {
     }
 }
 
+//3 es un obstaculo
+//0 un espacio en blanco
+//2 pared rompible
+//letras en mayusculas son jugadores
+
 function cargarSala() {
     $.get("/salas/tablero", function (data) {
         var tablero = data[0];
@@ -49,10 +57,10 @@ function cargarSala() {
                 } else if (tablero[i][j] === "0") {
                     var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
 
-                } else if (tablero[i][j] === "1") {
-                    var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
-
-                    
+//                } else if (tablero[i][j] === "1") {
+//                    var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
+//
+//                    
 
 
 
@@ -85,20 +93,43 @@ function cargarSala() {
                
 
             }
-        }
+        }}
         var myObstacle = new bomberman(20, 20, "images/Bombermans/player1/11.gif", 0 * 20, 26 * 20.2, "image");
         var myObstacle = new bomberman(20, 20, "images/Bombermans/player2/11.gif", 0 * 20, 25 * 20.2, "image");
         var myObstacle = new bomberman(20, 20, "images/Bombermans/player3/11.gif", 9 * 20, 26 * 20.2, "image");
         var myObstacle = new bomberman(20, 20, "images/Bombermans/player4/11.gif", 9 * 20, 25 * 20.2, "image");
-
+        
+       $.get("/salas/" + sessionStorage.getItem('sala') + "/info", function (data) {
+           for (i = 0; i < data.length; i++) {
+                if (data[i].alias === "A") {
+                    ctx.font = "bold 18px sans-serif";
+                    ctx.fillStyle = "white";
+                    nameA=data[i].nombre;
+                    ctx.fillText(data[i].nombre+" L= 2", 20, 540);
+                    
+                } else if (data[i].alias === "B") {
+                    nameB=data[i].nombre;
+                    ctx.font = "bold 18px sans-serif";
+                    ctx.fillStyle = "white";
+                    ctx.fillText(data[i].nombre +" L= 2", 20, 520);
+                    
+                } else if (data[i].nombre === "C") {
+                    ctx.font = "bold 18px sans-serif";
+                    ctx.fillStyle = "white";
+                    ctx.fillText(data[i].nombre, 380, 540);
+                } else if (data[i].nombre === "D") {
+                    ctx.font = "bold 18px sans-serif";
+                    ctx.fillStyle = "white";
+                    ctx.fillText(data[i].nombre, 380, 520);
+                }
+            }
+           
+       }  );
         
 
-        
+   
+    } ),
 
-
-    }
-    );
-}
 //cronometro
 
 function connect() {
@@ -331,4 +362,4 @@ $(document).ready(
 
 
         }
-);
+);}
