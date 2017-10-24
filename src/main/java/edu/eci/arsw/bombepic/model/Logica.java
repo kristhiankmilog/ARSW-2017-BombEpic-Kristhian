@@ -296,7 +296,55 @@ public class Logica implements LogicaInter{
 
     @Override
     public int[] muerte(String data, String[][] matriz) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean flag = true;
+        int myposx = 1, myposy = 1;
+        int[] ans = new int[2];
+        if (data.equals("A")) {
+            myposx = 23;
+            myposy = 1;
+        } else if (data.equals("B")) {
+            myposx = 1;
+            myposy = 1;
+        } else if (data.equals("D")) {
+            myposx = 1;
+            myposy = 34;
+        } else if (data.equals("C")) {
+            myposx = 23;
+            myposy = 34;
+        }
+        
+        if (flag) {
+            if (!matriz[myposx][myposy].equals("0")) {
+                for (int i = 0; i < 24; i++) {
+                    for (int col = 0; col < 35; col++) {
+                        if (matriz[i][col].equals("0")) {
+                            myposx = i;
+                            myposy = col;
+                            i = 25;
+                            break;
+                        }
+                    }
+                }
+            }
+        } else if (!matriz[myposx][myposy].equals("0")) {
+            for (int i = 14; i < 18; i++) {
+                for (int col = 16; col < 20; col++) {
+                    if (matriz[i][col].equals("0")) {
+                        myposx = i;
+                        myposy = col;
+                        i = 21;
+                        break;
+                    }
+                }
+            }
+        }
+        ans[0] = myposx;
+        ans[1] = myposy;
+        return ans;
+        
     }
+    
+    
+    
     
 }

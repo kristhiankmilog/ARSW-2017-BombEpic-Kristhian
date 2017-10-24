@@ -6,6 +6,10 @@
 package edu.eci.arsw.bombepic.controllers;
 
 
+import edu.eci.arsw.bombepic.model.ActualizaJuego;
+import edu.eci.arsw.bombepic.model.Logica;
+import edu.eci.arsw.bombepic.model.PosJugador;
+import edu.eci.arsw.bombepic.services.BombServices;
 import java.awt.Point;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,38 +27,36 @@ import org.springframework.stereotype.Controller;
 public class STOMPMessagesHandler {
     @Autowired
     SimpMessagingTemplate msgt;
-    String [][] tab;
     
-    private ConcurrentLinkedQueue<Point> lista= new ConcurrentLinkedQueue();
-    @MessageMapping("/newpoint")
+     @Autowired
+    BombServices services;
+     @Autowired
+    Logica Logic;
+    Object Lock = new Object();
+     
+     
+    
+    @MessageMapping("/mover.{idsala}")
+    public void mover(@DestinationVariable int idsala, PosJugador j) {
+        synchronized (Lock) {
+            
+            ActualizaJuego ac = Logic.mover(idsala, j);
+            if (ac.getActualizaciones()!=null){
+                msgt.convertAndSend("/topic/actualizarJuego." + String.valueOf(idsala), ac.getActualizaciones());
 
-    public void getLine(Point pt) throws Exception {
-        synchronized (this) {
-            System.out.println("Nuevo punto recibido en el servidor!:" + pt);
-            msgt.convertAndSend("/topic/newpoint", pt);
-            lista.add(pt);
-
-            if (lista.size() == 4) {
-                msgt.convertAndSend("/topic/newpolygon", lista);
-                lista.clear();
+            
+            
             }
+        
+        
+        
+        
         }
-
-}
-    @MessageMapping("/newdibujo.{iddibujo}")
-    public void handleBaz(@DestinationVariable int iddibujo, Point pt) {
-        synchronized (this) {
-            System.out.println("Punto de la sala:" + iddibujo+ pt);
-            msgt.convertAndSend("/topic/newdibujo."+iddibujo, pt);
-            lista.add(pt);
-
-            if (lista.size() == 4) {
-                msgt.convertAndSend("/topic/newpolygon."+iddibujo, lista);
-                lista.clear();
-            }
-        }
-
+                                
+    
+    
     }
+      
     
 
 }
