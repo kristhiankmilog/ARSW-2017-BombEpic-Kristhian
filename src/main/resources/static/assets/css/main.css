@@ -3376,14 +3376,7 @@
 /* Banner */
 
 	#banner {
-                background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/bombermans.jpg");
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/bombermans.jpg");
-		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/bombermans.jpg");
-		background-image: linear-gradient(top, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("../../images/bombermans.jpg");
-		background-position: center center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		display: -moz-flex;
+                display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
 		display: flex;
