@@ -18,11 +18,10 @@ function players() {
             contentType: "application/json"
         }).then(
                 function () {
-                    
-                    stompClient.subscribe('/topic/Play.'+sessionStorage.getItem('sala'), function (data) {
-                        document.location.href = "game.html";
-                    });
                     sessionStorage.setItem('identificador', identificador);
+                    
+                    
+                    
                 }
         ,
                 function (err) {
@@ -51,7 +50,6 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/mostrarJugadores', function (data) {
             gana = JSON.parse(data.body);
-            alert(String(data));
             if (flag===0){
                 if (gana[0].length===4){
                     location.reload();
@@ -64,6 +62,9 @@ function connect() {
                 $("#player").append(play[i].nombre + "<br>");
             }
             
+        });
+        stompClient.subscribe('/topic/Play.'+sessionStorage.getItem('sala'), function (data) {
+                        document.location.href = "game.html";
         });
 
 

@@ -11,6 +11,7 @@ import edu.eci.arsw.bombepic.model.Jugador;
 import org.springframework.web.bind.annotation.PathVariable;
 import edu.eci.arsw.bombepic.services.BombServices;
 import edu.eci.arsw.bombepic.services.ServicesException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,6 +52,8 @@ public class BombRESTController {
                     temp.add(playBombers);
                     
                     if(playBombers.size()==4){
+                        Thread.sleep(2000);
+                        msgt.convertAndSend("/topic/Play."+String.valueOf(salanum),p.getnombre());
                         services.setSalaDisponible(services.getSalaDisponible()+1);
                     }
                     
