@@ -57,12 +57,6 @@ function cargarSala() {
                 } else if (tablero[i][j] === "0") {
                     var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
 
-//                } else if (tablero[i][j] === "1") {
-//                    var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
-//
-//                    
-
-
 
                 } else if (tablero[i][j] === "2") {
                     var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
@@ -130,7 +124,6 @@ function cargarSala() {
    
     } ),
 
-//cronometro
 
 function connect() {
     var socket = new SockJS('/stompendpoint');

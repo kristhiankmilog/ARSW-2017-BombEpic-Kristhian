@@ -57,6 +57,7 @@ public class ActualizaJuego {
     public void setJugador(String jugador) {
         this.jugador = jugador;
     }
+
     
     
 }
