@@ -18,9 +18,10 @@
             <script src="/webjars/stomp-websocket/stomp.min.js"></script>
             <script src="waitingRoom.js"></script>
     </head>
-    <body>
+    <body onload="waitingRoom.init()">
 
             <!-- Page Wrapper -->
+            
             <div id="page-wrapper">
 
 
@@ -53,7 +54,7 @@
                 <b>Press the bomb when you are ready to play</b><br/>
                 <br/>
                 
-                <ul class="icons major" onclick="players()">
+                <ul class="icons major" onclick="waitingRoom.players()">
                     <li><span class="icon fa-bomb major style3"><span class="label">Dolor</span></span></li>
                 </ul>
 

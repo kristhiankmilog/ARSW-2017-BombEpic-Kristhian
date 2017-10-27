@@ -4,30 +4,36 @@
  * and open the template in the editor.
  */
 
-var nickname;
 
-function save() {
-    nickname = document.getElementById('nickname').value;
 
-    if (nickname==="" || nickname.length>9) {
-        alert("Ingrese Un Username Válido");
-    }
+var signIn =( function (){
+ 
+    var nickname;
     
-    else {
-        sessionStorage.setItem('nickname', document.getElementById('nickname').value);
-        document.location.href = "Room.html";
-    }
+    return {
+         save:function() {
+                nickname = document.getElementById('nickname').value;
+                alert("hey!");
+                if (nickname==="" || nickname.length>9) {
+                    alert("Ingrese Un Username Válido");
+                }
 
-}
-
-$(document).ready(
-        function () {
+                else {
+                    sessionStorage.setItem('nickname', document.getElementById('nickname').value);
+                    document.location.href = "Room.html";
+                }
+          
+        },
+        
+        init: function () {
             console.info('loading script!...');
-        }
-);
+        
+            }
+        
+        
+    };
 
-
-
-
-
+    
+    
+}) ();
 

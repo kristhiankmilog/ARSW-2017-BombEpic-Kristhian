@@ -302,60 +302,60 @@ return {
                     stompClient.send("/app/mover." + sessionStorage.getItem('sala'), {}, JSON.stringify({x: myposx, y: myposy, k: key, mem: mymem}));
                          }
 
-                }
-    
-    
-};
-
- $(document).ready(
-        function () {
-            console.info('loading script!...');
-            alert('Que comience el Juego!!!!!')
-            connect();
-            canvas = document.getElementById('cnv');
-            ctx = canvas.getContext('2d');
-
-           
-            window.addEventListener('keydown', function (e) {
-                key = e.keyCode;
-                moverPersonaje(key);
+                },
                 
                 
-                
-                console.log(key);
-            });
-            window.addEventListener('keyup', function (e) {
-                key = false;
-            });
+          init: function () {
+                    console.info('loading script!...');
+                    alert('Que comience el Juego!!!!!')
+                    connect();
+                    canvas = document.getElementById('cnv');
+                    ctx = canvas.getContext('2d');
+
+
+                    window.addEventListener('keydown', function (e) {
+                        key = e.keyCode;
+                        moverPersonaje(key);
 
 
 
-            $.get("/salas/" + sessionStorage.getItem('sala') , function (data) {
-                myplayer = data;
+                        console.log(key);
+                    });
+                    window.addEventListener('keyup', function (e) {
+                        key = false;
+                    });
 
-                
-                if (data === data.toUpperCase()) {
-                    mymem = 2;
-                    if (data === 'A') {
-                        myposx = 23;
-                       myposy = 1;
-                    } else if (data === 'B') {
-                        myposx = 1;
-                        myposy = 1;
-                    } else if (data === 'D') {
-                        myposx = 1;
-                        myposy = 34;
-                    } else if (data === 'C') {
-                        myposx = 23;
-                        myposy = 34;
-                    }
-                } 
+
+
+                    $.get("/salas/" + sessionStorage.getItem('sala') , function (data) {
+                        myplayer = data;
+
+
+                        if (data === data.toUpperCase()) {
+                            mymem = 2;
+                            if (data === 'A') {
+                                myposx = 23;
+                               myposy = 1;
+                            } else if (data === 'B') {
+                                myposx = 1;
+                                myposy = 1;
+                            } else if (data === 'D') {
+                                myposx = 1;
+                                myposy = 34;
+                            } else if (data === 'C') {
+                                myposx = 23;
+                                myposy = 34;
+                            }
+                        } 
 
             });
 
 
         }
-                );
+    
+    
+};
+
 
 })();
 
