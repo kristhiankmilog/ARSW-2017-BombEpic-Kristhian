@@ -87,6 +87,7 @@ $(document).ready(
                 sala=data;
                 sessionStorage.setItem('sala', sala);
                 
+                
                 $.get("/salas/"+data+"/jugadores", function (data3) {
                         $("#player").empty();
                         for (i = 0; i < data3.length; i++) {

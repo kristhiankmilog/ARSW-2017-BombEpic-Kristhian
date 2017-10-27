@@ -80,11 +80,7 @@ public class BombServicesStub implements BombServices{
 
     }
 
-    @Override
-    public String getID(int sala) throws ServicesException {
-       return null; // falta implementacion
-
-   }
+    
 
     @Override
     public List<InformacionJuego> getInfo(int sala) throws ServicesException {

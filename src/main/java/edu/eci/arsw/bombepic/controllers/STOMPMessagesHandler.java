@@ -48,9 +48,13 @@ public class STOMPMessagesHandler {
                     ac.setRompibles(false);
                     msgt.convertAndSend("/topic/paredrompible."+String.valueOf(idsala), ac.getRompibles()); 
                 }
+                else{
+                    msgt.convertAndSend("/topic/"+String.valueOf(idsala)+'/'+ac.getJugador(), ac.getPosiciones());  
+                }
             
-            
+           
             }
+            
         
         
         

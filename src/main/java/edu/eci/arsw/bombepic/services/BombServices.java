@@ -26,7 +26,7 @@ public interface BombServices {
     
     public void setSalaDisponible(int sala)throws ServicesException;
     
-    public String getID(int sala)throws ServicesException;
+  
     
     public List<InformacionJuego> getInfo(int sala)throws ServicesException;
     
