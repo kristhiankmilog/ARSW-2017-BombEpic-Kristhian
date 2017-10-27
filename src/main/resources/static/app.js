@@ -307,7 +307,7 @@ return {
                 
           init: function () {
                     console.info('loading script!...');
-                    alert('Que comience el Juego!!!!!')
+                    alert('Que comience el Juego!!!!!');
                     connect();
                     canvas = document.getElementById('cnv');
                     ctx = canvas.getContext('2d');

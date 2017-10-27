@@ -91,6 +91,8 @@ public class BombRESTController {
         
         try {
             return new ResponseEntity<>(services.getTablero(),HttpStatus.ACCEPTED);
+            
+            
         } catch (ServicesException ex) {
             Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);

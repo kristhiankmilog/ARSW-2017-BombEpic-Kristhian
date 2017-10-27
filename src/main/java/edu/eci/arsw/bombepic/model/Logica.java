@@ -61,7 +61,7 @@ public class Logica implements LogicaInter{
         ActualizaJuego ac = new ActualizaJuego();
         if (!salasMatrices.containsKey(idsala)) {
              try {
-                 Sala sala = new Sala(Tablero.tablero(), Tablero.obstaculo);
+                 Sala sala = new Sala(Tablero.tablero());
                  salasMatrices.put(idsala, sala);
              } catch (IOException ex) {
                  Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);

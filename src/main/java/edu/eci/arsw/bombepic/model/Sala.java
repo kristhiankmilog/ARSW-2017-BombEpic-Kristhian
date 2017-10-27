@@ -14,6 +14,8 @@ public class Sala {
     int puntos;
     int [] vidas= new int [1];
 
+    
+
     public String[][] getMatriz() {
         return matriz;
     }
@@ -38,9 +40,9 @@ public class Sala {
         this.vidas = vidas;
     }
 
-    public Sala(String[][] matriz, int puntos) {
+    public Sala(String[][] matriz) {
         this.matriz = matriz;
-        this.puntos = puntos;
+        
     }
     
     public Sala(){}
