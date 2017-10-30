@@ -16,10 +16,10 @@ var app =(function(){
     var totalFrames = 2;
     var imgs = null;
     var ky = null;
-    var playerA = "images/Bombermans/player1/11.gif";
-    var playerB = "images/Bombermans/player2/11.gif";
-    var playerC = "images/Bombermans/player3/11.gif";
-    var playerD = "images/Bombermans/player4/11.gif";
+//    var playerA = "images/Bombermans/player1/11.gif";
+//    var playerB = "images/Bombermans/player2/11.gif";
+//    var playerC = "images/Bombermans/player3/11.gif";
+//    var playerD = "images/Bombermans/player4/11.gif";
     var nicknameA;
     var nicknameB;
     var nicknameC;
@@ -36,13 +36,13 @@ return {
 // */
     selectImage:function() {
         if (ky === 37) {
-            imgs = "images/Bombermans/player1/21.gif";
+            imgs = "images/Bombermans/Player1/21.gif";
         } else if (ky === 38) {
-            imgs = "images/Bombermans/player1/01.gif";
+            imgs = "images/Bombermans/Player1/01.gif";
         } else if (ky === 39) {
-            imgs = "images/Bombermans/player1/31.gif";
+            imgs = "images/Bombermans/Player1/31.gif";
         } else if (ky === 40) {
-            imgs = "images/Bombermans/player1/11.gif";
+            imgs = "images/Bombermans/Player1/11.gif";
 
         }
       },
@@ -76,28 +76,28 @@ return {
                      } else if (tablero[i][j] === "A") {
                          var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
 
-                         var myObstacle = new bomberman(20, 20, "images/Bombermans/player1/11.gif", j * 20, i * 20, "image");
+                         var myObstacle = new bomberman(20, 20, "images/Bombermans/Player1/11.gif", j * 20, i * 20, "image");
 
                      } else if (tablero[i][j] === "B") {
                          var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
-                         var myObstacle = new bomberman(20, 20, "images/Bombermans/player2/11.gif", j * 20, i * 20, "image");
+                         var myObstacle = new bomberman(20, 20, "images/Bombermans/Player2/11.gif", j * 20, i * 20, "image");
                      } else if (tablero[i][j] === "C") {
                          var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
 
-                         var myObstacle = new bomberman(20, 20, "images/Bombermans/player3/11.gif", j * 20, i * 20, "image");
+                         var myObstacle = new bomberman(20, 20, "images/Bombermans/Player3/11.gif", j * 20, i * 20, "image");
 
                     } else if (tablero[i][j] === "D") {
                          var myObstacle = new bloque(20, 20, "black", j * 20, i * 20);
 
-                         var myObstacle = new bomberman(20, 20, "images/Bombermans/player4/11.gif", j * 20, i * 20, "image");
+                         var myObstacle = new bomberman(20, 20, "images/Bombermans/Player4/11.gif", j * 20, i * 20, "image");
 
 
                  }
              }}
-             var myObstacle = new bomberman(20, 20, "images/Bombermans/player1/11.gif", 0 * 20, 26 * 20.2, "image");
-             var myObstacle = new bomberman(20, 20, "images/Bombermans/player2/11.gif", 0 * 20, 25 * 20.2, "image");
-             var myObstacle = new bomberman(20, 20, "images/Bombermans/player3/11.gif", 9 * 20, 26 * 20.2, "image");
-             var myObstacle = new bomberman(20, 20, "images/Bombermans/player4/11.gif", 9 * 20, 25 * 20.2, "image");
+             var myObstacle = new bomberman(20, 20, "images/Bombermans/Player1/11.gif", 0 * 20, 26 * 20.2, "image");
+             var myObstacle = new bomberman(20, 20, "images/Bombermans/Player2/11.gif", 0 * 20, 25 * 20.2, "image");
+             var myObstacle = new bomberman(20, 20, "images/Bombermans/Player3/11.gif", 9 * 20, 26 * 20.2, "image");
+             var myObstacle = new bomberman(20, 20, "images/Bombermans/Player4/11.gif", 9 * 20, 25 * 20.2, "image");
 
             $.get("/salas/" + sessionStorage.getItem(salaid) + "/info", function (data) {
                 for (i = 0; i < data.length; i++) {
@@ -168,7 +168,7 @@ return {
 
 
                         if (tablero[i].key === "A") {
-                            var myObstacle = new bomber(20, 20, "images/Bombermans/player1/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
+                            var myObstacle = new bomber(20, 20, "images/Bombermans/Player1/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
                             if (myplayer === tablero[i].key) {
                                 myposx = tablero[i].x;
                                 myposy = tablero[i].y;
@@ -176,21 +176,21 @@ return {
                            }
 
                         } else if (tablero[i].key === "B") {
-                           var myObstacle = new bomber(20, 20, "images/Bombermans/player2/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
+                           var myObstacle = new bomber(20, 20, "images/Bombermans/Player2/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
                            if (myplayer === tablero[i].key) {
                                 myposx = tablero[i].x;
                                 myposy = tablero[i].y;
                             }
 
                         } else if (tablero[i].key === "C") {
-                            var myObstacle = new bomber(20, 20, "images/Bombermans/player3/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
+                            var myObstacle = new bomber(20, 20, "images/Bombermans/Player3/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
                             if (myplayer === tablero[i].key) {
                                 myposx = tablero[i].x;
                                 myposy = tablero[i].y;
                             }
 
                         } else if (tablero[i].key === "D") {
-                            var myObstacle = new bomber(20, 20, "images/Bombermans/player4/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
+                            var myObstacle = new bomber(20, 20, "images/Bombermans/Player4/11.gif", 20 * tablero[i].y, 20 * tablero[i].x, "image");
                             if (myplayer === tablero[i].key) {
                                 myposx = tablero[i].x;
                                 myposy = tablero[i].y;
@@ -250,61 +250,61 @@ return {
                 });
 
 
-                cargarSala();
+                this.cargarSala();
 
 
 
             });
            },
            
-    bomberman: function(width, height, color, x, y, type) {
-
-            var image = new Image();
-            image.src = color;
-            image.onload = function () {
-                ctx.drawImage(image, x, y, width, height);
-            };
-
-        },
-        
-        
-      bomber:function(width, height, color, x, y, type) {
-
-            var image = new Image();
-            image.src = color;
-            //image.onload = function(){
-            ctx.drawImage(image, x, y, width, height);
-            //};
-
-        },
-        
-         isUpperCase:function(str) {
-                return str === str.toUpperCase();
-            },
-            
-            
-         bloque:function(width, height, color, x, y) {
-                ctx.fillStyle = color;
-                ctx.fillRect(x, y, width, height);
-             },
-             
-        disconnect:function() {
-            if (stompClient != null) {
-                  stompClient.disconnect();
-              }
-              //setConnected(false);
-              console.log("Disconnected");
-          },
-          
-          moverPersonaje: function(key) {
-                if (36 < key && key < 41) {
-                    ky = key;
-                    stompClient.send("/app/mover." + sessionStorage.getItem('sala'), {}, JSON.stringify({x: myposx, y: myposy, k: key, mem: mymem}));
-                         }
-
-                },
-                
-                
+//    bomberman: function(width, height, color, x, y, type) {
+//
+//            var image = new Image();
+//            image.src = color;
+//            image.onload = function () {
+//                ctx.drawImage(image, x, y, width, height);
+//            };
+//
+//        },
+//        
+//        
+//      bomber:function(width, height, color, x, y, type) {
+//
+//            var image = new Image();
+//            image.src = color;
+//            //image.onload = function(){
+//            ctx.drawImage(image, x, y, width, height);
+//            //};
+//
+//        },
+//        
+//         isUpperCase:function(str) {
+//                return str === str.toUpperCase();
+//            },
+//            
+//            
+//         bloque:function(width, height, color, x, y) {
+//                ctx.fillStyle = color;
+//                ctx.fillRect(x, y, width, height);
+//             },
+//             
+//        disconnect:function() {
+//            if (stompClient != null) {
+//                  stompClient.disconnect();
+//              }
+//              //setConnected(false);
+//              console.log("Disconnected");
+//          },
+//          
+//          moverPersonaje: function(key) {
+//                if (36 < key && key < 41) {
+//                    ky = key;
+//                    stompClient.send("/app/mover." + sessionStorage.getItem('sala'), {}, JSON.stringify({x: myposx, y: myposy, k: key, mem: mymem}));
+//                         }
+//
+//                },
+//                
+//                
           init: function () {
                     console.info('loading script!...');
                     alert('Que comience el Juego!!!!!');
