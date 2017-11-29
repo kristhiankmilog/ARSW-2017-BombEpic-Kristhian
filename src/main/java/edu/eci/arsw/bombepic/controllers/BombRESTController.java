@@ -56,10 +56,10 @@ public class BombRESTController {
                     
                     if(playBombers.size()==4){
                         msgt.convertAndSend("/topic/Play."+String.valueOf(salanum),"inicio el juego");
-                        services.setSalaDisponible(services.getSalaDisponible()+1);
+                        
                     }
                     
-                    msgt.convertAndSend("/topic/mostrarJugadores",temp);
+                    msgt.convertAndSend("/topic/mostrarJugadores/"+salanum,temp);
                     
                  }
              } catch (Exception ex) {
@@ -88,11 +88,11 @@ public class BombRESTController {
         }
 }
        
-        @RequestMapping(path = "/tablero",method = RequestMethod.GET)
-    public ResponseEntity<?> getTablero() {
+        @RequestMapping(path = "/tablero/{salanum}",method = RequestMethod.GET)
+    public ResponseEntity<?> getTablero(@PathVariable(name = "salanum") Integer salanum) {
         
         try {
-            return new ResponseEntity<>(services.getTablero(),HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(services.getTablero(salanum),HttpStatus.ACCEPTED);
            
         } catch (ServicesException ex) {
             Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);

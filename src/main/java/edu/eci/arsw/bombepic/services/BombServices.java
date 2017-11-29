@@ -20,7 +20,7 @@ public interface BombServices {
     
     public List<Jugador> getJugadores( int salanum)throws ServicesException;
     
-    public String [][]getTablero()throws ServicesException;
+    public String [][]getTablero(int salanum)throws ServicesException;
     
     public int getSalaDisponible()throws ServicesException;
     

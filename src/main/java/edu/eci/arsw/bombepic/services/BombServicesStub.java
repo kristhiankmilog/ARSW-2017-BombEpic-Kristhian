@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 public class BombServicesStub implements BombServices{
     private ConcurrentHashMap<Integer, Jugadores> salasData=new ConcurrentHashMap<>();
+     private ConcurrentHashMap<Integer, String[][]> salasTab=new ConcurrentHashMap<>();
     private String[][] mat;
     private int salas=0;
     private ConcurrentHashMap<Integer, Sala> salasMat = new ConcurrentHashMap<>();
@@ -52,21 +53,26 @@ public class BombServicesStub implements BombServices{
 
     @Override
     public List<Jugador> getJugadores(int salanum) throws ServicesException {
+        if(salasData.get(salanum)==null){
+            salasData.put(salanum,new Jugadores());
+            return salasData.get(salanum).getJugadores();
+        }
         return salasData.get(salanum).getJugadores();
     }
 
 
     @Override
-    public String[][] getTablero() throws ServicesException {
-        if (mat==null){
+    public String[][] getTablero(int salanum) throws ServicesException {
+        if (salasTab.get(salanum)==null){
             try {
-                mat=tab.tablero();
+                salasTab.put(salanum, new Tablero().tablero());
+                return salasTab.get(salanum);
             } catch (IOException ex) {
                 Logger.getLogger(BombServicesStub.class.getName()).log(Level.SEVERE, null, ex);
             }
         
         }
-        return mat;
+        return salasTab.get(salanum);
                
     }
 

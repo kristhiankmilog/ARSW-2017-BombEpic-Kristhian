@@ -47,7 +47,7 @@ var waitingRoom =(function(){
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, function (frame) {
                     console.log('Connected: ' + frame);
-                    stompClient.subscribe('/topic/mostrarJugadores', function (data) {
+                    stompClient.subscribe('/topic/mostrarJugadores/'+sala, function (data) {
                         gana = JSON.parse(data.body);
                         if (flag===0){
                             if (gana[0].length===4){
@@ -62,7 +62,7 @@ var waitingRoom =(function(){
                         }
 
                     });
-                    stompClient.subscribe('/topic/Play.'+sessionStorage.getItem('sala'), function (data) {
+                    stompClient.subscribe('/topic/Play.'+sala, function (data) {
                                     document.location.href = "game.html";
                     });
 
@@ -75,21 +75,18 @@ var waitingRoom =(function(){
                     this.connect();
                     nickname = sessionStorage.getItem('nickname');
                     $("#welcome").append("<b>Welcome " + sessionStorage.getItem('nickname') + "</b><br><br>");
-
-
-                    $.get("/salas/salaDisponible", function (data) {
-                        sala=data;
-                        sessionStorage.setItem('sala', sala);
-
-
-                        $.get("/salas/"+data+"/jugadores", function (data3) {
-                                $("#player").empty();
-                                for (i = 0; i < data3.length; i++) {
-                                    $("#player").append(data3[i].nombre + "<br>");
-                                }
-                                });
-                        }
-                    );
+                    
+                                 
+                        
+                    sala=sessionStorage.getItem('salaid');
+                    $.get("/salas/"+sala+"/jugadores", function (data3) {
+                            $("#player").empty();
+                            for (i = 0; i < data3.length; i++) {
+                                $("#player").append(data3[i].nombre + "<br>");
+                            }
+                    });
+                    
+                    
                 }
         
         
