@@ -39,21 +39,23 @@ public class STOMPMessagesHandler {
     @MessageMapping("/mover.{idsala}")
     public void mover(@DestinationVariable int idsala, PosJugador j) {
         synchronized (Lock) {
+            System.out.println("------------------------------"+j.getKey());
+            String[][] ac = Logic.mover(idsala, j);
             
-            ActualizaJuego ac = Logic.mover(idsala, j);
-            if (ac.getActualizaciones()!=null){
-                msgt.convertAndSend("/topic/actualizarJuego." + String.valueOf(idsala), ac.getActualizaciones());
+            
                 
-                if (ac.getRompibles()){
-                    ac.setRompibles(false);
-                    msgt.convertAndSend("/topic/paredrompible."+String.valueOf(idsala), ac.getRompibles()); 
-                }
-                else{
-                    msgt.convertAndSend("/topic/"+String.valueOf(idsala)+'/'+ac.getJugador(), ac.getPosiciones());  
-                }
-            
+                msgt.convertAndSend("/topic/actualizarJuego." + String.valueOf(idsala), ac);
+                
+//                if (ac.getRompibles()){
+//                    ac.setRompibles(false);
+//                    msgt.convertAndSend("/topic/paredrompible."+String.valueOf(idsala), ac.getRompibles()); 
+//                }
+//                else{
+//                    msgt.convertAndSend("/topic/"+String.valueOf(idsala)+'/'+ac.getJugador(), ac.getPosiciones());  
+//                }
+//            
            
-            }
+            
             
         
         

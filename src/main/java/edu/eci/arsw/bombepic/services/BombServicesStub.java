@@ -30,20 +30,23 @@ public class BombServicesStub implements BombServices{
     private String[][] mat;
     private int salas=0;
     private ConcurrentHashMap<Integer, Sala> salasMat = new ConcurrentHashMap<>();
+    private Tablero tab;
     
     public BombServicesStub(){
         salasData.put(0,new Jugadores());
+        tab= new Tablero();
+        
     }
     
     
     @Override
-    public void registroJugador(int salanum, Jugador p) throws ServicesException {
-          CopyOnWriteArrayList tmp =salasData.get(salanum).getJugadores();
-          int a = 65 +tmp.size();
-          salasData.get(salanum).setIds(p.getnick(), Character.toString((char)a));
-          InformacionJuego inf=new InformacionJuego(p.getnombre(), Character.toString((char)a));
-          tmp.add(p);
-          salasData.get(salanum).setJugadores(tmp);
+    public void registroJugador(int salanum, Jugador p,String carac) throws ServicesException {
+        CopyOnWriteArrayList tmp =salasData.get(salanum).getJugadores();
+        int a = 65 +tmp.size();
+        salasData.get(salanum).setIds(p.getnick(), Character.toString((char)a));
+        InformacionJuego inf=new InformacionJuego(p.getnombre(), Character.toString((char)a));
+        tmp.add(p);
+        salasData.get(salanum).setJugadores(tmp);
           
         }
 
@@ -57,7 +60,7 @@ public class BombServicesStub implements BombServices{
     public String[][] getTablero() throws ServicesException {
         if (mat==null){
             try {
-                mat=Tablero.tablero();
+                mat=tab.tablero();
             } catch (IOException ex) {
                 Logger.getLogger(BombServicesStub.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -79,6 +82,11 @@ public class BombServicesStub implements BombServices{
         this.salas=sala;
 
     }
+    
+    @Override
+    public String getId(int sala, String user) throws ServicesException {
+        return salasData.get(sala).getIds().get(user);
+    }
 
     
 
@@ -99,6 +107,18 @@ public class BombServicesStub implements BombServices{
         this.salasMat=sala;
 
 
+    }
+    
+    @Override
+    public Jugador getJugador(int sala,String jugador){
+        for (int i = 0; i < salasData.get(sala).getJugadores().size(); i++) {
+            if(salasData.get(sala).getJugadores().get(i).getnombre()==jugador){
+                Jugador tmp=salasData.get(sala).getJugadores().get(i);
+                return tmp;
+            }
+        }
+       
+        return null;
     }
 
     

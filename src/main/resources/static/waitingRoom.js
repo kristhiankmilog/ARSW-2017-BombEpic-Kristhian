@@ -16,7 +16,7 @@ var waitingRoom =(function(){
                     $.ajax({
                         url: "salas/"+sala+"/players",
                         type: 'PUT',
-                        data: JSON.stringify({nombre: nickname,alias:nickname+cad}),
+                        data: JSON.stringify({nombre: nickname,nick:nickname+cad}),
                         contentType: "application/json"
                     }).then(
                             function () {

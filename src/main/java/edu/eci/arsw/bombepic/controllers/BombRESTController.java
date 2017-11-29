@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/salas")
 public class BombRESTController {
     
+    
+    
      @Autowired
         BombServices services;
      
@@ -45,20 +47,20 @@ public class BombRESTController {
          synchronized (services){
              try {
                  if(services.getJugadores(Integer.parseInt(salanum)).size()< 4 ){
-                    services.registroJugador(Integer.parseInt(salanum), p);
                     ArrayList<List<Jugador>> temp=new ArrayList<>();
                     List <Jugador >playBombers=services.getJugadores(Integer.parseInt(salanum));
+                    int a = 65 +playBombers.size();
+                    services.registroJugador(Integer.parseInt(salanum), p,Character.toString((char)a));
                     
                     temp.add(playBombers);
                     
                     if(playBombers.size()==4){
-                        Thread.sleep(50);
-                        msgt.convertAndSend("/topic/Play."+String.valueOf(salanum),p.getnombre());
+                        msgt.convertAndSend("/topic/Play."+String.valueOf(salanum),"inicio el juego");
                         services.setSalaDisponible(services.getSalaDisponible()+1);
                     }
                     
                     msgt.convertAndSend("/topic/mostrarJugadores",temp);
-                     
+                    
                  }
              } catch (Exception ex) {
                    Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,13 +88,12 @@ public class BombRESTController {
         }
 }
        
-        @RequestMapping(path = "/{salanum}/tablero",method = RequestMethod.GET)
-    public ResponseEntity<?> getTablero(@PathVariable(name = "salanum") String salanum) {
+        @RequestMapping(path = "/tablero",method = RequestMethod.GET)
+    public ResponseEntity<?> getTablero() {
         
         try {
             return new ResponseEntity<>(services.getTablero(),HttpStatus.ACCEPTED);
-            
-            
+           
         } catch (ServicesException ex) {
             Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
@@ -114,8 +115,43 @@ public class BombRESTController {
             return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
         }}
     }
+    
+    
+    @RequestMapping(path = "{salanum}/{id}",method = RequestMethod.GET)
+    public ResponseEntity<?> getId(@PathVariable(name = "salanum") String salanum,@PathVariable(name = "id") String id) {
+        
+        try {
+            return new ResponseEntity<>(services.getId(Integer.parseInt(salanum),id),HttpStatus.ACCEPTED);
+        } catch (ServicesException ex) {
+            Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.NOT_FOUND);
+        }catch (NumberFormatException ex){
+            Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("/{salanum}/ must be an integer value.",HttpStatus.BAD_REQUEST);
+        }
+    }
+    
+    
 
-       
+    @RequestMapping(path = "/{salanum}/update",method = RequestMethod.POST)
+     public ResponseEntity<?> actualizarTablero(@PathVariable(name="salanum")String salanum,@RequestBody Jugador p){
+         synchronized (services){
+             try {
+                List <Jugador >playBombers=services.getJugadores(Integer.parseInt(salanum));
+                msgt.convertAndSend("/topic/mostrarJugadores");
+                     
+                 
+             } catch (Exception ex) {
+                   Logger.getLogger(BombRESTController.class.getName()).log(Level.SEVERE, null, ex);
+                   return new ResponseEntity<>(ex.getLocalizedMessage(),HttpStatus.BAD_REQUEST);
+                 
+             }
+             
+             return new ResponseEntity<>(HttpStatus.CREATED);
+                   
+         
+         }
+     }   
        
      
      

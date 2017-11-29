@@ -13,10 +13,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class Jugador{
     String nombre; 
-    String nick; 
+    String nick;
     
-    public Jugador (String nombre){
+    
+   
+    
+    public Jugador (String nombre, String nick){
         this.nombre=nombre;
+        this.nick=nick;     
     }
     
     public String getnick(){
@@ -33,8 +37,8 @@ public class Jugador{
     public void setnombre(String nombre){
         this.nombre=nombre;
     }
-
     
+       
     public Jugador(){}
     
 

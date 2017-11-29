@@ -13,15 +13,15 @@ public class PosJugador {
     private int x;
     private int y;
     private int key;
-    private int memo;
+    
     
     public PosJugador(){}
     
-    public PosJugador(int x, int y, int key,int mem) {
+    public PosJugador(int x, int y, int key) {
         this.x = x;
         this.y = y;
         this.key = key;
-        this.memo=memo;
+        
     }
 
     public int getX() {
@@ -46,16 +46,7 @@ public class PosJugador {
 
     public void setKey(int key) {
         this.key = key;
-    }
-
-    public int getMemo() {
-        return memo;
-    }
-
-    public void setMemo(int memo) {
-        this.memo = memo;
-    }
-    
+    }   
     
     
 }

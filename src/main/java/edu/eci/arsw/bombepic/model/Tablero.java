@@ -21,61 +21,46 @@ public  class Tablero {
     public static int obstaculo;
     public  static String[][] tabl;
     
+    public Tablero(){
+        
+        tabl=new String[21][21];
+        
+      
+        obstaculo=3;
+        
+        for (int i = 0; i < tabl.length; i++) {
+            for (int j = 0; j < tabl.length; j++) {
+                if(((i%2)==0) && ((j%2)==0)){
+                    tabl[i][j]="3";
+                }else if((i==1 && j==2)||(i==2 && j==1)||(i==1 && j==18)||(i==2 && j==19)||(i==18 && j==1)||(i==19 && j==2)||(i==19 && j==18)||(i==18 && j==19)){
+                    tabl[i][j]="1";
+                }else{
+                    Random numAleatorio = new Random ();
+                    tabl[i][j]=String.valueOf(numAleatorio.nextInt(2)+1);
+                }
+            }
+            
+        }
+        
+        for (int i = 0; i < tabl.length; i++) {
+            tabl[i][0]="3";
+            tabl[i][tabl.length-1]="3";            
+        }
+        for (int j = 0; j < tabl.length; j++) {
+            tabl[0][j]="3";
+            tabl[tabl.length-1][j]="3";
+        }
+        tabl[1][1]="A";
+        tabl[19][1]="B";
+        tabl[1][19]="C";
+        tabl[19][19]="D";
+        
+    }
+    
     
     public static String [][] tablero() throws IOException{
-        
-        
-        tabl=new String[25][36];
-        tabl[0][0]="A";
-        tabl[25][0]="B";
-        tabl[0][36]="C";
-        tabl[25][36]="D";
-      
-         obstaculo=3;
-               
-        Random numAleatorio = new Random ();
-        for (int i = 0; i < tabl.length; i++) {
-            for (int j=0;j< tabl.length;j++){
-                if ((tabl[i][j]!="A")||(tabl[i][j]!="B")||(tabl[i][j]!="C")||(tabl[i][j]!="D")){
-                    tabl[i][j] =String.valueOf(numAleatorio.nextInt(3)+1) ;   
-                }
-                
-            
-            }
-        }
-//        FileReader file=null;
-//        
-//        
-//        
-//        try{
-//            String x;
-//            file= new FileReader("tablero.txt");
-//            
-//            BufferedReader b= new BufferedReader(file);
-//            int i=0;
-//            x=b.readLine();
-//            String [] cadena=x.split(" ");
-//            
-//            int filas=Integer.valueOf(cadena[0]);
-//            int colu=Integer.valueOf(cadena[1]);
-//            obstaculo=Integer.valueOf(cadena[2]);
-//            
-//            t1=new String[filas][colu];
-//            for (int j = 0; j < filas; j++) {
-//                
-//                x=b.readLine();
-//                cadena=x.split("\t");
-//                for (int k = 0; k < cadena.length; k++) {
-//                    t1[j][k]= cadena[k];
-//                    System.out.println("haciendo tablero" + t1);
-//                    
-//                }
-//                
-//            }
-//            b.close();
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         return tabl;
     }
+    
+    
 }

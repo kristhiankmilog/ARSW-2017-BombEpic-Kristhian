@@ -10,7 +10,7 @@ package edu.eci.arsw.bombepic.model;
  * @author tiffany
  */
 public interface LogicaInter {
-    public ActualizaJuego mover (int idsala,PosJugador j );
+    public String[][] mover (int idsala,PosJugador j );
     public int[] muerte  (String data, String [][] matriz );
     
 }

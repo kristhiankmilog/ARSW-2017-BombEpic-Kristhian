@@ -13,9 +13,8 @@ var signIn =( function (){
     return {
          save:function() {
                 nickname = document.getElementById('nickname').value;
-                alert("hey!");
                 if (nickname==="" || nickname.length>9) {
-                    alert("Ingrese Un Username Válido");
+                    alert("Insert Valid Nickname");
                 }
 
                 else {

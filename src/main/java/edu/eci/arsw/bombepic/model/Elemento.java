@@ -17,7 +17,7 @@ public class Elemento {
     
     public Elemento(){};
 
-    Elemento(int x, int y, String string, int i) {
+    Elemento(int x, int y, String string) {
                this.x = x;
                this.y = y;
                this.key = key;

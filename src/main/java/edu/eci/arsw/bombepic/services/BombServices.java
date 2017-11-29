@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author tiffany
  */
 public interface BombServices {
-    public void registroJugador(int salanum,Jugador p)throws ServicesException;
+    public void registroJugador(int salanum,Jugador p, String carac)throws ServicesException;
     
     public List<Jugador> getJugadores( int salanum)throws ServicesException;
     
@@ -26,7 +26,7 @@ public interface BombServices {
     
     public void setSalaDisponible(int sala)throws ServicesException;
     
-  
+    public String getId(int sala, String user)  throws ServicesException;
     
     public List<InformacionJuego> getInfo(int sala)throws ServicesException;
     
@@ -34,7 +34,7 @@ public interface BombServices {
     
     public void setSalasMat(ConcurrentHashMap<Integer,Sala> sala)throws ServicesException;
 
-    
+    public Jugador getJugador(int sala,String jugador)throws ServicesException;
     
     
     
