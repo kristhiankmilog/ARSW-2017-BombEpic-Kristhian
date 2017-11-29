@@ -28,11 +28,9 @@ Professor
 Hector Fabio Cadavid Rengifo
 
 
-Authors
+Author
 ---------
->Tiffany Estupiñan L. 
-
->Kristhian Gómez 
+Kristhian Gómez
 
 App Heroku
 -----------
