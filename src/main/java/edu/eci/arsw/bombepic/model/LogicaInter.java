@@ -11,6 +11,7 @@ package edu.eci.arsw.bombepic.model;
  */
 public interface LogicaInter {
     public String[][] mover (int idsala,PosJugador j );
+    
     public int[] muerte  (String data, String [][] matriz );
     
 }

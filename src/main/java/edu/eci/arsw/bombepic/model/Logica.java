@@ -6,6 +6,7 @@
 package edu.eci.arsw.bombepic.model;
 
 import edu.eci.arsw.bombepic.services.BombServices;
+import edu.eci.arsw.bombepic.services.BombServicesStub;
 import edu.eci.arsw.bombepic.services.ServicesException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +46,8 @@ public class Logica implements LogicaInter{
      @Autowired
     BombServices services;
     private ConcurrentHashMap<Integer, Sala> salasMatrices ;
-    Elemento bomba; 
+    
+    
 
     public Logica() {
     }
@@ -55,6 +57,7 @@ public class Logica implements LogicaInter{
     public String[][] mover(int idsala, PosJugador j) {
          try {
              salasMatrices= services.getSalasMat();
+             
          } catch (ServicesException ex) {
              Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -78,7 +81,12 @@ public class Logica implements LogicaInter{
         //para el jugador
         System.out.println(j.getX()+"-+-+-+-+"+j.getY()+"+-+-+-+-+-+"+j.getKey());
         if (matriz[j.getX()][j.getY()].equals("B") || matriz[j.getX()][j.getY()].equals("A") || matriz[j.getX()][j.getY()].equals("C") || matriz[j.getX()][j.getY()].equals("D")) {
-            
+            //if(bombasJugadores.get(j.getnick())!=null){
+            //    bombasJugadores.get(j.getnick()).setCountbomb(bombasJugadores.get(j.getnick()).getCountbomb()+1);
+            //    if(bombasJugadores.get(j.getnick()).getCountbomb()==2){
+            //        matriz[bombasJugadores.get(j.getnick()).getXbomb()][bombasJugadores.get(j.getnick()).getYbomb()]="5";
+            //    }
+            //}
             if (j.getKey() == 40) {
                 System.out.println("entro a"+j.getKey());
                 if (((j.getX()+1)<20) && (matriz[j.getX()+1][j.getY()]).equals("1")  ) {
@@ -147,7 +155,7 @@ public class Logica implements LogicaInter{
              
              
              
-             
+    
         
      
 

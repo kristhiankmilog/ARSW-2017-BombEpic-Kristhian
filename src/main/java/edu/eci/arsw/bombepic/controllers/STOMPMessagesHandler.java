@@ -7,9 +7,11 @@ package edu.eci.arsw.bombepic.controllers;
 
 
 import edu.eci.arsw.bombepic.model.ActualizaJuego;
+import edu.eci.arsw.bombepic.model.Bomb;
 import edu.eci.arsw.bombepic.model.Logica;
 import edu.eci.arsw.bombepic.model.PosJugador;
 import edu.eci.arsw.bombepic.services.BombServices;
+import edu.eci.arsw.bombepic.services.ServicesException;
 import java.awt.Point;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,32 +41,25 @@ public class STOMPMessagesHandler {
     @MessageMapping("/mover.{idsala}")
     public void mover(@DestinationVariable int idsala, PosJugador j) {
         synchronized (Lock) {
-            System.out.println("------------------------------"+j.getKey());
-            String[][] ac = Logic.mover(idsala, j);
             
-            
-                
+                String[][] ac = Logic.mover(idsala, j);
                 msgt.convertAndSend("/topic/actualizarJuego." + String.valueOf(idsala), ac);
+              
+            
+                            
+        
+        }    
+    
+    }
+    
+    @MessageMapping("/bomb.{idsala}")
+    public void bomb(@DestinationVariable int idsala, Bomb b) throws ServicesException {
+        b.setStatbomb(true);
+        System.out.println("+-+-+-+-+-+-+"+b.getNickbomb()+"+ ++ + + "+b.getXbomb());
+        String[][] tp= services.bomb(idsala, b);
+        msgt.convertAndSend("/topic/actualizarJuego." + String.valueOf(idsala), tp); 
+        
                 
-//                if (ac.getRompibles()){
-//                    ac.setRompibles(false);
-//                    msgt.convertAndSend("/topic/paredrompible."+String.valueOf(idsala), ac.getRompibles()); 
-//                }
-//                else{
-//                    msgt.convertAndSend("/topic/"+String.valueOf(idsala)+'/'+ac.getJugador(), ac.getPosiciones());  
-//                }
-//            
-           
-            
-            
-        
-        
-        
-        
-        }
-                                
-    
-    
     }
       
     

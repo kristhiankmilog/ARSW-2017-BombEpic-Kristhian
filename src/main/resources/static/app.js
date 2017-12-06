@@ -40,7 +40,7 @@ var app = (function () {
 
         cargarInfo: function () {
 
-            alert("esta es la sala #: " + salaid);
+            
 
             $.get("/salas/" + salaid + "/jugadores", function (data) {
                 $("#plays").empty();
@@ -66,7 +66,7 @@ var app = (function () {
 
             $.get("salas/tablero/"+salaid, function (data) {
                 tablero = data;
-                alert(tablero);
+                
 
                 function bloque(width, height, color, x, y, type) {
                     canvas = document.getElementById('cnv');
@@ -142,8 +142,7 @@ var app = (function () {
                             ctx.drawImage(image, x, y, width, height);
                         };
                     }
-                }
-                ;
+                };
 
 
                 //subscriptions            
@@ -154,7 +153,10 @@ var app = (function () {
                         for (j = 0; j < table.length; j++) {
                             if (table[i][j] === "1") {
                                 var myObstacle = new bloque(20, 20, "", j * 20, i * 20, "");
-                            } else if (table[i][j] === "3") {
+                            }else if(table[i][j] === "4"){
+                                var myObstacle = new bloque(20, 20, "", j * 20, i * 20, "");
+                                var myObstacle = new bloque(20, 20, "images/BomberBombs/2.gif", j * 20, i * 20, "image");
+                            }else if (table[i][j] === "3") {
                                 var myObstacle = new bloque(20, 20, "images/BomberWalls/1.jpg", j * 20, i * 20, "image");
                             } else if (table[i][j] === "2") {
                                 var myObstacle = new bloque(20, 20, "images/BomberBricks/1.jpg", j * 20, i * 20, "image");
@@ -192,13 +194,25 @@ var app = (function () {
                                 var myObstacle = new bloque(20, 20, "", j * 20, i * 20, "");
                                 var myObstacle = new bloque(20, 20, "images/Bombermans/Player4/11.gif", j * 20, i * 20, "image");
 
+                            }else if(table[i][j] === "5"){
+                                alert("coloque bomba");
+                                var myObstacle = new bloque(20, 20, "images/BomberFires/C2.gif", j * 20, i * 20, "image");
+                                var myObstacle = new bloque(20, 20, "images/BomberFires/E2.gif", (j+1) * 20, i * 20, "image");
+                                var myObstacle = new bloque(20, 20, "images/BomberFires/W2.gif", (j-1) * 20, i * 20, "image");
+                                var myObstacle = new bloque(20, 20, "images/BomberFires/N2.gif", j * 20, (i+1) * 20, "image");
+                                var myObstacle = new bloque(20, 20, "images/BomberFires/S2.gif", j * 20, (i-1) * 20, "image");
+                                sleep(4000);
+                                var myObstacle = new bloque(20, 20, "", (j+1) * 20, i * 20, "");
+                                var myObstacle = new bloque(20, 20, "", (j-1) * 20, i * 20, "");
+                                var myObstacle = new bloque(20, 20, "", j * 20, i * 20, "");
+                                var myObstacle = new bloque(20, 20, "", j * 20, (i+1) * 20, "");
+                                var myObstacle = new bloque(20, 20, "", j * 20, (i-1) * 20, "");
                             }
-                        }
-                        ;
-                    }
-                    ;
+                        };
+                    };
 
                 });
+                                
                 stompClient.subscribe("/topic/winner." + salaid, function (eventbody) {
 
                 });
@@ -234,8 +248,12 @@ var app = (function () {
                     if (36 < key && key < 41) {
                         ky = key;
 
-                        stompClient.send("/app/mover." + sessionStorage.getItem('salaid'), {}, JSON.stringify({x: myposx, y: myposy, key: ky}));
+                        stompClient.send("/app/mover." + sessionStorage.getItem('salaid'), {}, JSON.stringify({x: myposx, y: myposy, key: ky, nick:myplayer}));
 
+                    }
+                    
+                    if(key===32){
+                        stompClient.send("/app/bomb." + sessionStorage.getItem('salaid'), {}, JSON.stringify({xbomb: myposx, ybomb: myposy, nick:myplayer}));
                     }
                 }
                 ;
@@ -256,7 +274,7 @@ var app = (function () {
 
             $.get("/salas/" + sessionStorage.getItem('salaid') + "/" + sessionStorage.getItem('identificador'), function (data) {
                 myplayer = data;
-                alert(myplayer);
+                
 
                 if (data === data.toUpperCase()) {
 

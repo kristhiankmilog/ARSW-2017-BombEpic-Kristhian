@@ -13,14 +13,16 @@ public class PosJugador {
     private int x;
     private int y;
     private int key;
+    private String nick;
     
     
     public PosJugador(){}
     
-    public PosJugador(int x, int y, int key) {
+    public PosJugador(int x, int y, int key,String nick) {
         this.x = x;
         this.y = y;
         this.key = key;
+        this.nick= nick;
         
     }
 
@@ -46,7 +48,11 @@ public class PosJugador {
 
     public void setKey(int key) {
         this.key = key;
-    }   
+    }
     
+    public String getnick(){
+        return nick;
+    }
     
+      
 }

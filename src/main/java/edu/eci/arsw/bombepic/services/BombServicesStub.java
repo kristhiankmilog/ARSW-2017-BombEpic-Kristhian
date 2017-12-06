@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.bombepic.services;
 
+import edu.eci.arsw.bombepic.model.Bomb;
 import edu.eci.arsw.bombepic.model.InformacionJuego;
 import edu.eci.arsw.bombepic.model.Jugador;
 import edu.eci.arsw.bombepic.model.Sala;
@@ -27,11 +28,12 @@ import org.springframework.stereotype.Service;
 
 public class BombServicesStub implements BombServices{
     private ConcurrentHashMap<Integer, Jugadores> salasData=new ConcurrentHashMap<>();
-     private ConcurrentHashMap<Integer, String[][]> salasTab=new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, String[][]> salasTab=new ConcurrentHashMap<>();
     private String[][] mat;
     private int salas=0;
     private ConcurrentHashMap<Integer, Sala> salasMat = new ConcurrentHashMap<>();
     private Tablero tab;
+    private ConcurrentHashMap<String, Bomb> bombasJugadores=new ConcurrentHashMap<>();
     
     public BombServicesStub(){
         salasData.put(0,new Jugadores());
@@ -74,6 +76,11 @@ public class BombServicesStub implements BombServices{
         }
         return salasTab.get(salanum);
                
+    }
+    
+    public void setTablero(int salanum, String[][] mat) throws ServicesException {
+        salasTab.remove(salanum);
+        salasTab.put(salas, mat);
     }
 
     @Override
@@ -125,6 +132,20 @@ public class BombServicesStub implements BombServices{
         }
        
         return null;
+    }
+    
+    @Override
+    public String[][] bomb(int idsala, Bomb j) throws ServicesException{
+            bombasJugadores.put("", new Bomb());
+            bombasJugadores.put("", j);
+            String[][] matriz = this.getTablero(idsala);
+            matriz[j.getXbomb()][j.getYbomb()]="4";
+            this.setTablero(idsala, matriz);
+            return matriz;
+        
+        
+        
+        
     }
 
     

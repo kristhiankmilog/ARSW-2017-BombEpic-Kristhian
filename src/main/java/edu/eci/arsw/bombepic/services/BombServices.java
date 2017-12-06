@@ -5,6 +5,7 @@
  */
 package edu.eci.arsw.bombepic.services;
 
+import edu.eci.arsw.bombepic.model.Bomb;
 import edu.eci.arsw.bombepic.model.InformacionJuego;
 import edu.eci.arsw.bombepic.model.Jugador;
 import edu.eci.arsw.bombepic.model.Sala;
@@ -35,6 +36,8 @@ public interface BombServices {
     public void setSalasMat(ConcurrentHashMap<Integer,Sala> sala)throws ServicesException;
 
     public Jugador getJugador(int sala,String jugador)throws ServicesException;
+    
+    public String[][] bomb(int idsala, Bomb j) throws ServicesException;
     
     
     
